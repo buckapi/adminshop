@@ -1,0 +1,88 @@
+<app-header></app-header>
+<app-floaty></app-floaty>
+<app-navigation></app-navigation>
+<app-navsmall></app-navsmall>
+<app-navmobile></app-navmobile>
+<app-messages></app-messages>
+<app-message></app-message>
+
+<div class="content-grid">
+  <app-subheader  [hidden]="_butler.virtualRoute!='dashboard'"></app-subheader>
+  <app-swiper></app-swiper>
+  <app-product-grid  [hidden]="_butler.virtualRoute!='products'"></app-product-grid>
+</div>
+
+
+<div class="popup-box  popup-event-creation "  >
+  <div class="popup-close-button popup-event-creation-trigger" >
+    <svg class="popup-close-button-icon icon-cross">
+      <use xlink:href="#svg-cross"></use>
+    </svg>
+  </div>
+
+  <p class="popup-box-title">+ Producto</p>
+
+  <form class="form"  (ngSubmit)="onSubmit()" >
+    <div class="row">
+    <div class="col-md-6">
+      <div class="form-row">
+        <div class="form-item">
+          <ngx-awesome-uploader
+          [adapter]="adapter"
+          [captions]="captions">
+          </ngx-awesome-uploader>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-row">
+        <div class="form-item">
+          <div class="form-input small">
+            <label for="event-name">Nombre del producto</label>
+            <input type="text" [(ngModel)]="data.name" name="name" required  [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-item">
+          <div class="form-select">
+            <label for="event-category">Categoría</label>
+            <select [(ngModel)]="data.idBranch" name="idBranch" required  [ngModelOptions]="{standalone: true}">
+              <option value="">Seleccione una</option>
+              <option *ngFor="let branch of branchOptions" [value]="branch.idBranch">{{ branch.name }}</option>
+            </select>
+            <svg class="form-select-icon icon-small-arrow">
+              <use xlink:href="#svg-small-arrow"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-item">
+          <div class="form-input small">
+            <label for="event-description">Descripción</label>
+            <textarea    [ngModelOptions]="{standalone: true}" [(ngModel)]="data.description" ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-item">
+          <div class="form-input small">
+            <label for="event-name">Precio del producto</label>
+            <input type="text" [(ngModel)]="data.price" name="price"  [ngModelOptions]="{standalone: true}" required>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    
+
+    <div class="popup-box-actions medium void">
+      <button class=" button secondary  popup-event-creation-trigger" id="closeButton" (click)="runButtonClicked()">Guardar producto!</button>
+    </div>
+  </form>
+</div>
+
+  
